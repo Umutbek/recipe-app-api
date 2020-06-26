@@ -3,5 +3,4 @@ exclude =
 
   migrations,
   __pycashe__,
-  manage.py,
-  settings.py
+  manage.py
