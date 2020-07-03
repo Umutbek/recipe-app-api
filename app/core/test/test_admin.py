@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+
 class AdminSiteTests(TestCase):
     def setUp(self):
         self.client = Client()
@@ -14,7 +15,7 @@ class AdminSiteTests(TestCase):
         self.user = get_user_model().objects.create_user(
             email='test@gmail.com',
             password='test123',
-            name = 'Test user full name'
+            name='Test user full name'
         )
 
     def test_users_listed(self):
@@ -24,7 +25,6 @@ class AdminSiteTests(TestCase):
 
         self.assertContains(res, self.user.name)
         self.assertContains(res, self.user.email)
-
 
     def test_user_change_page(self):
         """Test that the user edit page works"""
