@@ -18,7 +18,7 @@ class PublicIngredientApiTests(TestCase):
         self.client = APIClient()
 
     def test_login_required(self):
-        """Test that login is required for retrieving tags"""
+        """Test that login is required for retrieving ingredients"""
         res =self.client.get(INGREDIENTS_URL)
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
@@ -34,7 +34,7 @@ class PrivateIngredinetApiTests(TestCase):
         self.client = APIClient()
         self.client.force_authenticate(self.user)
 
-    def test_retrieve_tags(self):
+    def test_retrieve_ingredients(self):
         """Test retrieving ingredient"""
         Ingredient.objects.create(user=self.user, name='Kale')
         Ingredient.objects.create(user=self.user, name='Salt')
@@ -47,7 +47,7 @@ class PrivateIngredinetApiTests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer.data)
 
-    def test_tags_limited_to_user(self):
+    def test_ingredients_limited_to_user(self):
         """Test that ingredient returned are for the authenticated user"""
         user2 = get_user_model().objects.create_user(
             'karimovumutbek@gmail.com',
